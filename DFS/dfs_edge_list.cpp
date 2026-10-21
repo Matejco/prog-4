@@ -1,10 +1,8 @@
 #include <iostream>
 using namespace std;
 
-const int MAXN = 105;
-const int MAXM = 10005;
-int od[MAXM], kon[MAXM];
-bool visited[MAXN];
+int od[10005], kon[10005];
+bool visited[105];
 int n, m;
 
 void dfs(int x) {

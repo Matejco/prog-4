@@ -1,9 +1,8 @@
 #include <iostream>
 using namespace std;
 
-const int MAXN = 105;
-int mat[MAXN][MAXN];
-bool visited[MAXN];
+int mat[105][105];
+bool visited[105];
 int n, m;
 
 void dfs(int x) {

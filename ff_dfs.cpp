@@ -1,25 +1,9 @@
 #include <iostream>
 using namespace std;
 
-const int MAXN = 105;
-const int INF = 1000000000;
-
-int n, s, t;
-int cap[MAXN][MAXN];
-bool visited[MAXN];
-
-void init(int V) {
-    n = V;
-    s = 0;
-    t = V - 1;
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < n; j++)
-            cap[i][j] = 0;
-}
-
-void addEdge(int a, int b, int c) {
-    cap[a][b] += c;
-}
+int n, t;
+int cap[105][105];
+bool visited[105];
 
 int dfs(int x, int f) {
     if (x == t) return f;
@@ -40,45 +24,53 @@ int dfs(int x, int f) {
     return 0;
 }
 
-int maxflow() {
+int maxflow(int V) {
+    n = V;
+    t = V - 1;
     int flow = 0;
     while (true) {
         for (int i = 0; i < n; i++)
             visited[i] = false;
 
-        int f = dfs(s, INF);
+        int f = dfs(0, 1000000000);
         if (f == 0) break;
         flow += f;
     }
     return flow;
 }
 
+void isprazni() {
+    for (int i = 0; i < 105; i++)
+        for (int j = 0; j < 105; j++)
+            cap[i][j] = 0;
+}
+
 int main() {
-    init(4);
-    addEdge(0, 1, 8); addEdge(0, 2, 8); addEdge(1, 3, 8);
-    addEdge(2, 3, 8); addEdge(2, 1, 1);
-    cout << "FF Killer: " << maxflow() << endl;
+    isprazni();
+    cap[0][1] = 8; cap[0][2] = 8; cap[1][3] = 8;
+    cap[2][3] = 8; cap[2][1] = 1;
+    cout << "FF Killer: " << maxflow(4) << endl;
 
-    init(8);
-    addEdge(0, 1, 1); addEdge(0, 2, 1); addEdge(0, 3, 1);
-    addEdge(1, 4, 1); addEdge(1, 5, 1); addEdge(1, 6, 1);
-    addEdge(2, 5, 1); addEdge(3, 5, 1);
-    addEdge(4, 7, 1); addEdge(5, 7, 1); addEdge(6, 7, 1);
-    cout << "CP4 Ex 8.5.3.1* (correct): " << maxflow() << endl;
+    isprazni();
+    cap[0][1] = 1; cap[0][2] = 1; cap[0][3] = 1;
+    cap[1][4] = 1; cap[1][5] = 1; cap[1][6] = 1;
+    cap[2][5] = 1; cap[3][5] = 1;
+    cap[4][7] = 1; cap[5][7] = 1; cap[6][7] = 1;
+    cout << "CP4 Ex 8.5.3.1* (correct): " << maxflow(8) << endl;
 
-    init(8);
-    addEdge(0, 1, 10); addEdge(0, 2, 5); addEdge(0, 3, 15);
-    addEdge(1, 2, 4); addEdge(1, 4, 9); addEdge(1, 5, 15);
-    addEdge(2, 3, 4); addEdge(2, 5, 8); addEdge(3, 6, 16);
-    addEdge(4, 5, 15); addEdge(4, 7, 10); addEdge(5, 6, 15);
-    addEdge(5, 7, 10); addEdge(6, 2, 6); addEdge(6, 7, 10);
-    cout << "CS4234 MF Demo: " << maxflow() << endl;
+    isprazni();
+    cap[0][1] = 10; cap[0][2] = 5; cap[0][3] = 15;
+    cap[1][2] = 4; cap[1][4] = 9; cap[1][5] = 15;
+    cap[2][3] = 4; cap[2][5] = 8; cap[3][6] = 16;
+    cap[4][5] = 15; cap[4][7] = 10; cap[5][6] = 15;
+    cap[5][7] = 10; cap[6][2] = 6; cap[6][7] = 10;
+    cout << "CS4234 MF Demo: " << maxflow(8) << endl;
 
-    init(6);
-    addEdge(0, 1, 2); addEdge(0, 2, 3); addEdge(1, 3, 99);
-    addEdge(1, 4, 99); addEdge(2, 4, 99);
-    addEdge(3, 5, 2); addEdge(4, 5, 2);
-    cout << "Matching with Capacity: " << maxflow() << endl;
+    isprazni();
+    cap[0][1] = 2; cap[0][2] = 3; cap[1][3] = 99;
+    cap[1][4] = 99; cap[2][4] = 99;
+    cap[3][5] = 2; cap[4][5] = 2;
+    cout << "Matching with Capacity: " << maxflow(6) << endl;
 
     return 0;
 }

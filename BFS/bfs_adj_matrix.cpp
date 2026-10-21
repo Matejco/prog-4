@@ -1,10 +1,9 @@
 #include <iostream>
 using namespace std;
 
-const int MAXN = 105;
-int mat[MAXN][MAXN];
-bool visited[MAXN];
-int q[MAXN];
+int mat[105][105];
+bool visited[105];
+int q[105];
 
 int main() {
     int n, m;

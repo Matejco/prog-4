@@ -1,15 +1,14 @@
 #include <iostream>
 using namespace std;
 
-const int MAXN = 105;
-int adj[MAXN][MAXN];
-int deg[MAXN];
-bool visited[MAXN];
+int adj[105][105];
+int br[105];
+bool visited[105];
 
 void dfs(int x) {
     visited[x] = true;
     cout << x << " ";
-    for (int i = 0; i < deg[x]; i++) {
+    for (int i = 0; i < br[x]; i++) {
         int y = adj[x][i];
         if (!visited[y])
             dfs(y);
@@ -23,10 +22,10 @@ int main() {
     for (int i = 0; i < m; i++) {
         int a, b;
         cin >> a >> b;
-        adj[a][deg[a]] = b;
-        deg[a]++;
-        adj[b][deg[b]] = a;
-        deg[b]++;
+        adj[a][br[a]] = b;
+        br[a]++;
+        adj[b][br[b]] = a;
+        br[b]++;
     }
 
     int start;

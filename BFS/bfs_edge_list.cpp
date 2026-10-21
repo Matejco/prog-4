@@ -1,45 +1,43 @@
 #include <iostream>
-#include <vector>
-#include <queue>
 using namespace std;
 
-struct Edge {
-    int from, to;
-};
+const int MAXN = 105;
+const int MAXM = 10005;
+int od[MAXM], kon[MAXM];
+bool visited[MAXN];
+int q[MAXN];
 
 int main() {
     int n, m;
     cin >> n >> m;
 
-    vector<Edge> edges;
     for (int i = 0; i < m; i++) {
-        int a, b;
-        cin >> a >> b;
-        edges.push_back({a, b});
+        cin >> od[i] >> kon[i];
     }
 
     int start;
     cin >> start;
 
-    vector<bool> visited(n, false);
-    queue<int> q;
-    q.push(start);
+    int pocetok = 0, kraj = 0;
+    q[kraj] = start;
+    kraj++;
     visited[start] = true;
 
-    while (!q.empty()) {
-        int x = q.front();
-        q.pop();
+    while (pocetok < kraj) {
+        int x = q[pocetok];
+        pocetok++;
         cout << x << " ";
 
         // mora da se pominat site rabovi za sekoe teme
         for (int i = 0; i < m; i++) {
             int sosed = -1;
-            if (edges[i].from == x) sosed = edges[i].to;
-            else if (edges[i].to == x) sosed = edges[i].from;
+            if (od[i] == x) sosed = kon[i];
+            else if (kon[i] == x) sosed = od[i];
 
             if (sosed != -1 && !visited[sosed]) {
                 visited[sosed] = true;
-                q.push(sosed);
+                q[kraj] = sosed;
+                kraj++;
             }
         }
     }

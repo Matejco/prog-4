@@ -1,10 +1,10 @@
 #include <iostream>
-#include <queue>
 using namespace std;
 
 const int MAXN = 105;
 int mat[MAXN][MAXN];
 bool visited[MAXN];
+int q[MAXN];
 
 int main() {
     int n, m;
@@ -20,19 +20,21 @@ int main() {
     int start;
     cin >> start;
 
-    queue<int> q;
-    q.push(start);
+    int pocetok = 0, kraj = 0;
+    q[kraj] = start;
+    kraj++;
     visited[start] = true;
 
-    while (!q.empty()) {
-        int x = q.front();
-        q.pop();
+    while (pocetok < kraj) {
+        int x = q[pocetok];
+        pocetok++;
         cout << x << " ";
 
         for (int i = 0; i < n; i++) {
             if (mat[x][i] == 1 && !visited[i]) {
                 visited[i] = true;
-                q.push(i);
+                q[kraj] = i;
+                kraj++;
             }
         }
     }

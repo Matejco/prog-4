@@ -1,37 +1,44 @@
 #include <iostream>
-#include <vector>
-#include <queue>
 using namespace std;
+
+const int MAXN = 105;
+int adj[MAXN][MAXN];
+int deg[MAXN];
+bool visited[MAXN];
+int q[MAXN];
 
 int main() {
     int n, m;
     cin >> n >> m;
 
-    vector<vector<int>> adj(n);
     for (int i = 0; i < m; i++) {
         int a, b;
         cin >> a >> b;
-        adj[a].push_back(b);
-        adj[b].push_back(a);
+        adj[a][deg[a]] = b;
+        deg[a]++;
+        adj[b][deg[b]] = a;
+        deg[b]++;
     }
 
     int start;
     cin >> start;
 
-    vector<bool> visited(n, false);
-    queue<int> q;
-    q.push(start);
+    int pocetok = 0, kraj = 0;
+    q[kraj] = start;
+    kraj++;
     visited[start] = true;
 
-    while (!q.empty()) {
-        int x = q.front();
-        q.pop();
+    while (pocetok < kraj) {
+        int x = q[pocetok];
+        pocetok++;
         cout << x << " ";
 
-        for (int y : adj[x]) {
+        for (int i = 0; i < deg[x]; i++) {
+            int y = adj[x][i];
             if (!visited[y]) {
                 visited[y] = true;
-                q.push(y);
+                q[kraj] = y;
+                kraj++;
             }
         }
     }

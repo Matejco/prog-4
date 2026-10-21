@@ -49,14 +49,14 @@ int main() {
     isprazni();
     cap[0][1] = 8; cap[0][2] = 8; cap[1][3] = 8;
     cap[2][3] = 8; cap[2][1] = 1;
-    cout << "FF Killer: " << maxflow(4) << endl;
+    cout << "Prv primer (FF killer), max protok = " << maxflow(4) << endl;
 
     isprazni();
     cap[0][1] = 1; cap[0][2] = 1; cap[0][3] = 1;
     cap[1][4] = 1; cap[1][5] = 1; cap[1][6] = 1;
     cap[2][5] = 1; cap[3][5] = 1;
     cap[4][7] = 1; cap[5][7] = 1; cap[6][7] = 1;
-    cout << "CP4 Ex 8.5.3.1* (correct): " << maxflow(8) << endl;
+    cout << "Vtor primer (od CP4), max protok = " << maxflow(8) << endl;
 
     isprazni();
     cap[0][1] = 10; cap[0][2] = 5; cap[0][3] = 15;
@@ -64,13 +64,13 @@ int main() {
     cap[2][3] = 4; cap[2][5] = 8; cap[3][6] = 16;
     cap[4][5] = 15; cap[4][7] = 10; cap[5][6] = 15;
     cap[5][7] = 10; cap[6][2] = 6; cap[6][7] = 10;
-    cout << "CS4234 MF Demo: " << maxflow(8) << endl;
+    cout << "Tret primer (CS4234 demo), max protok = " << maxflow(8) << endl;
 
     isprazni();
     cap[0][1] = 2; cap[0][2] = 3; cap[1][3] = 99;
     cap[1][4] = 99; cap[2][4] = 99;
     cap[3][5] = 2; cap[4][5] = 2;
-    cout << "Matching with Capacity: " << maxflow(6) << endl;
+    cout << "Cetvrt primer (matching so kapaciteti), max protok = " << maxflow(6) << endl;
 
     return 0;
 }
